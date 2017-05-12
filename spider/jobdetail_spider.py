@@ -14,6 +14,7 @@ logging.basicConfig(format="%(asctime)s-%(name)s-%(levelname)s-%(message)s\t", l
 
 
 def crawl_job_detail(positionId, positionName):
+    pass
     """get the detailed description of the job"""
     request_url = 'https://m.lagou.com/jobs/' + str(positionId) + '.html'
     headers = {
@@ -39,6 +40,7 @@ def crawl_job_detail(positionId, positionName):
 
 
 def write_job_details(positionId, text, parent_dir_name):
+    
     """write the job details text into text file"""
     details_dir = JOB_DETAIL_DIR + parent_dir_name + os.path.sep
     mkdirs_if_not_exists(details_dir)
