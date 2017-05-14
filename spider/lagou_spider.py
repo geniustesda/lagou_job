@@ -115,7 +115,7 @@ def get_max_pageNo(positionName):
 
 
 if __name__ == '__main__':
-    jobname = '人工智能'
+    jobname = 'python'
     craw_job_list = ["python","机器学习","数据挖掘","后端","前端", "Android","人工智能" ]
     for _ in craw_job_list:
         joblist = crawl_jobs(_)

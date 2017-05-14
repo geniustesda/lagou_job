@@ -57,4 +57,4 @@ def write_job_details(positionId, text, parent_dir_name):
 
 if __name__ == '__main__':
     crawl_job_detail('3040728','')
-    print(joblist)
+
