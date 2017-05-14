@@ -8,13 +8,13 @@ from config.config import TIME_SLEEP
 
 from util.excel_helper import mkdirs_if_not_exists
 
+
 JOB_DETAIL_DIR = './data/'
 
 logging.basicConfig(format="%(asctime)s-%(name)s-%(levelname)s-%(message)s\t", level=logging.DEBUG)
 
 
 def crawl_job_detail(positionId, positionName):
-    pass
     """get the detailed description of the job"""
     request_url = 'https://m.lagou.com/jobs/' + str(positionId) + '.html'
     headers = {
@@ -27,7 +27,7 @@ def crawl_job_detail(positionId, positionName):
     }
 
     response = requests.get(request_url, headers=headers, timeout=10)
-    if response.status_code == 200:
+    if  response.status_code == 200:
         soup = BeautifulSoup(response.text, 'html5lib')
         text = soup.find_all('div', class_='content')[0].get_text()
 
@@ -40,7 +40,6 @@ def crawl_job_detail(positionId, positionName):
 
 
 def write_job_details(positionId, text, parent_dir_name):
-    
     """write the job details text into text file"""
     details_dir = JOB_DETAIL_DIR + parent_dir_name + os.path.sep
     mkdirs_if_not_exists(details_dir)
@@ -57,4 +56,5 @@ def write_job_details(positionId, text, parent_dir_name):
 
 
 if __name__ == '__main__':
-    crawl_job_detail('517435')
+    crawl_job_detail('3040728','')
+    print(joblist)
