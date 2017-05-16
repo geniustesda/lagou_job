@@ -13,7 +13,7 @@ from spider.jobdetail_spider import crawl_job_detail
 import pandas as pd
 from util import log
 from config.config import TIME_SLEEP
-from util.excel_helper import write_excel
+#from util.excel_helper import write_excel
 # from entity import job
 from imp import reload
 
@@ -83,7 +83,6 @@ def get_cookies():
 def get_max_pageNo(positionName):
     """return the max page number of a specific job"""
     cookies = get_cookies()
-    
 #    https://m.lagou.com/search.json?city=%E5%85%A8%E5%9B%BD&positionName=
     request_url = 'https://m.lagou.com/search.json?city=上海&positionName=' + parse.quote(
         positionName) + '&pageNo=1&pageSize=15'
@@ -101,8 +100,8 @@ def get_max_pageNo(positionName):
     response = requests.get(request_url, headers=headers, cookies=cookies, timeout=10)
     print("获取 %s 信息路由:" % positionName + request_url)
     if response.status_code == 200:
-        max_page_no = int(int(response.json()['content']['data']['page']['totalCount']) / 15 + 1)
-        
+        max_page_no = int(int(response.json()['content']['data']['page']['totalCount'])/15 + 1)
+
         return max_page_no
     elif response.status_code == 403:
         log.error('request is forbidden by the server...')
@@ -116,7 +115,7 @@ def get_max_pageNo(positionName):
 
 if __name__ == '__main__':
     jobname = 'python'
-    craw_job_list = ["python","机器学习","数据挖掘","后端","前端", "Android","人工智能" ]
+    craw_job_list = ["Android","机器学习","数据挖掘","后端","前端", "Python","人工智能" ]
     for _ in craw_job_list:
         joblist = crawl_jobs(_)
         col = [
@@ -132,4 +131,4 @@ if __name__ == '__main__':
         df = pd.DataFrame(joblist, columns=col)
         path = "./data/"
         df.to_csv(path + _ + ".csv")
-        write_excel(joblist, jobname)
+#        write_excel(joblist, jobname)
